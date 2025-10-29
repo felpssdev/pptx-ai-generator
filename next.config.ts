@@ -18,10 +18,6 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  // Performance & optimization
-  swcMinify: true,
-  compress: true,
-  
   // Headers for security and performance
   async headers() {
     return [
@@ -50,16 +46,11 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react'],
   },
 
-  // WebAssembly support for sharp
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.experiments = {
-        ...config.experiments,
-        asyncWebAssembly: true,
-        layers: true,
-      };
-    }
-    return config;
+  // Turbopack configuration for Next.js 16
+  turbopack: {
+    resolveAlias: {
+      '@': './src',
+    },
   },
 };
 
