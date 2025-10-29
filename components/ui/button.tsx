@@ -8,15 +8,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-500',
+          'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500',
         outline:
-          'border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 focus-visible:ring-brand-500',
+          'border-2 border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 focus-visible:ring-blue-500',
         ghost:
-          'text-neutral-700 hover:bg-neutral-100 focus-visible:ring-brand-500',
+          'text-neutral-700 hover:bg-neutral-100 focus-visible:ring-blue-500',
         destructive:
-          'bg-error text-white hover:bg-red-600 focus-visible:ring-error',
+          'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-500',
         success:
-          'bg-success text-white hover:bg-emerald-600 focus-visible:ring-success',
+          'bg-emerald-600 text-white hover:bg-emerald-700 focus-visible:ring-emerald-500',
       },
       size: {
         sm: 'h-8 px-3 text-sm',

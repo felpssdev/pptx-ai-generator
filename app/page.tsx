@@ -79,16 +79,16 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-800">
+      <nav className="sticky top-0 z-40 bg-white border-b border-neutral-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-6 h-6 text-brand-500" />
-            <span className="text-xl font-bold text-white">pptx-ai</span>
+            <Sparkles className="w-6 h-6 text-blue-600" />
+            <span className="text-xl font-bold text-neutral-900">pptx-ai</span>
           </div>
           <Link href="/create">
-            <Button size="sm" className="gap-2">
+            <Button size="sm" className="gap-2 bg-blue-600 hover:bg-blue-700 text-white">
               Get Started
               <ChevronRight className="w-4 h-4" />
             </Button>
@@ -97,11 +97,11 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-32 px-6">
+      <section className="relative overflow-hidden pt-20 pb-32 px-6 bg-gradient-to-b from-white via-blue-50 to-white">
         {/* Gradient orbs */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-brand-600/20 rounded-full blur-3xl" />
-          <div className="absolute top-40 -left-40 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200/30 rounded-full blur-3xl" />
+          <div className="absolute top-40 -left-40 w-80 h-80 bg-purple-200/30 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center">
@@ -110,15 +110,15 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-6xl md:text-7xl font-bold text-neutral-900 mb-6 leading-tight">
               Create{' '}
-              <span className="bg-gradient-to-r from-brand-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Presentations
               </span>
               <br />
               with AI
             </h1>
-            <p className="text-xl text-neutral-400 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-700 mb-12 max-w-2xl mx-auto">
               Describe your idea and let AI generate professional, visually stunning
               presentations in seconds. No design skills required.
             </p>
@@ -140,19 +140,19 @@ export default function LandingPage() {
                 onKeyPress={(e) =>
                   e.key === 'Enter' && handleGeneratePresentation()
                 }
-                className="flex-1 px-6 py-4 bg-neutral-900 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all"
+                className="flex-1 px-6 py-4 bg-white border-2 border-neutral-300 rounded-lg text-neutral-900 placeholder-neutral-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
               />
               <Button
                 onClick={handleGeneratePresentation}
                 disabled={isLoading || !prompt.trim()}
                 size="lg"
-                className="gap-2 px-8"
+                className="gap-2 px-8 bg-blue-600 hover:bg-blue-700 text-white"
               >
                 {isLoading ? 'Generating...' : 'Generate'}
                 <Zap className="w-5 h-5" />
               </Button>
             </div>
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-neutral-600">
               No credit card required. Free tier includes up to 5 presentations.
             </p>
           </motion.div>
@@ -160,7 +160,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 px-6 bg-neutral-900/50">
+      <section className="py-24 px-6 bg-white border-t border-neutral-200">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -169,10 +169,10 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
               Powerful Features
             </h2>
-            <p className="text-xl text-neutral-400">
+            <p className="text-xl text-neutral-600">
               Everything you need to create stunning presentations
             </p>
           </motion.div>
@@ -190,17 +190,17 @@ export default function LandingPage() {
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="p-8 bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-xl border border-neutral-700 hover:border-brand-500/50 transition-all hover:shadow-lg hover:shadow-brand-500/10"
+                  className="p-8 bg-white border-2 border-neutral-200 rounded-xl hover:border-blue-300 hover:shadow-lg transition-all"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-brand-500/20 rounded-lg flex-shrink-0">
-                      <Icon className="w-6 h-6 text-brand-400" />
+                    <div className="p-3 bg-blue-100 rounded-lg flex-shrink-0">
+                      <Icon className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">
+                      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
                         {feature.title}
                       </h3>
-                      <p className="text-neutral-400">{feature.description}</p>
+                      <p className="text-neutral-600">{feature.description}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -211,7 +211,7 @@ export default function LandingPage() {
       </section>
 
       {/* Templates Section */}
-      <section className="py-24 px-6 bg-neutral-950">
+      <section className="py-24 px-6 bg-neutral-50 border-t border-neutral-200">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -220,10 +220,10 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
               Beautiful Templates
             </h2>
-            <p className="text-xl text-neutral-400">
+            <p className="text-xl text-neutral-600">
               Choose from our professionally designed templates
             </p>
           </motion.div>
@@ -241,10 +241,9 @@ export default function LandingPage() {
                 variants={itemVariants}
                 className="group relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-600 to-blue-600 rounded-xl opacity-0 group-hover:opacity-10 transition-opacity blur" />
-                <div className="relative p-8 bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-xl border border-neutral-700 group-hover:border-brand-500/50 transition-all">
+                <div className="relative p-8 bg-white border-2 border-neutral-200 rounded-xl group-hover:border-blue-300 group-hover:shadow-lg transition-all">
                   {/* Template Preview */}
-                  <div className="mb-6 h-48 bg-neutral-900 rounded-lg border border-neutral-700 flex items-center justify-center">
+                  <div className="mb-6 h-48 bg-neutral-100 rounded-lg border-2 border-neutral-200 flex items-center justify-center">
                     <div
                       className="w-32 h-32 rounded-lg"
                       style={{
@@ -269,14 +268,14 @@ export default function LandingPage() {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                  <h3 className="text-xl font-semibold text-neutral-900 mb-2">
                     {template.name}
                   </h3>
-                  <p className="text-neutral-400 text-sm">
+                  <p className="text-neutral-600 text-sm">
                     {template.description}
                   </p>
 
-                  <div className="mt-4 pt-4 border-t border-neutral-700">
+                  <div className="mt-4 pt-4 border-t border-neutral-200">
                     <p className="text-xs text-neutral-500 uppercase tracking-wide">
                       {template.layout} layout
                     </p>
@@ -289,7 +288,7 @@ export default function LandingPage() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-24 px-6 bg-neutral-900/50">
+      <section className="py-24 px-6 bg-white border-t border-neutral-200">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -298,22 +297,22 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-white">
+            <h2 className="text-5xl md:text-6xl font-bold text-neutral-900">
               Ready to create?
             </h2>
-            <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
               Join thousands of professionals creating presentations with AI. No
               experience needed.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/create">
-                <Button size="lg" className="gap-2 w-full sm:w-auto">
+                <Button size="lg" className="gap-2 w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white">
                   Start Creating
                   <ChevronRight className="w-5 h-5" />
                 </Button>
               </Link>
-              <button className="px-8 py-3 text-white font-medium border border-neutral-700 rounded-lg hover:border-neutral-600 hover:bg-neutral-900/50 transition-all">
+              <button className="px-8 py-3 text-neutral-900 font-medium border-2 border-neutral-300 rounded-lg hover:border-neutral-400 hover:bg-neutral-50 transition-all">
                 Learn More
               </button>
             </div>
@@ -322,11 +321,11 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-neutral-800 py-12 px-6">
-        <div className="max-w-7xl mx-auto text-center text-neutral-500 text-sm">
+      <footer className="border-t border-neutral-200 py-12 px-6 bg-white">
+        <div className="max-w-7xl mx-auto text-center text-neutral-600 text-sm">
           <p>
             © 2024 pptx-ai. Built with{' '}
-            <span className="text-brand-500">❤️</span> for creators.
+            <span className="text-blue-600">❤️</span> for creators.
           </p>
         </div>
       </footer>

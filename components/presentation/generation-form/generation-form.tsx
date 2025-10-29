@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Button, Input } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { Upload } from 'lucide-react';
 
 export interface GenerationFormProps {
@@ -74,7 +74,7 @@ export const GenerationForm = ({
           onChange={(e) => setPrompt(e.target.value)}
           disabled={isLoading}
           placeholder="Describe what your presentation should be about. Be specific! (e.g., 'A presentation about machine learning fundamentals for business leaders')"
-          className="w-full rounded-md border border-neutral-300 bg-white px-4 py-3 text-base placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:bg-neutral-100 disabled:text-neutral-500 resize-none"
+          className="w-full rounded-md border-2 border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:border-blue-500 disabled:bg-neutral-100 disabled:text-neutral-500 resize-none"
           rows={4}
         />
         <p className="text-xs text-neutral-500">
@@ -96,8 +96,8 @@ export const GenerationForm = ({
               disabled={isLoading}
               className={`rounded-md px-3 py-2 text-sm font-medium transition-all ${
                 numSlides === option.value
-                  ? 'bg-brand-600 text-white ring-2 ring-brand-500 ring-offset-2'
-                  : 'border border-neutral-300 bg-white text-neutral-900 hover:border-brand-400 disabled:opacity-50'
+                  ? 'bg-blue-600 text-white ring-2 ring-blue-500 ring-offset-2'
+                  : 'border-2 border-neutral-300 bg-white text-neutral-900 hover:border-blue-400 hover:bg-blue-50 disabled:opacity-50'
               }`}
             >
               {option.label}
@@ -122,9 +122,9 @@ export const GenerationForm = ({
           />
           <label
             htmlFor="logo"
-            className="flex cursor-pointer items-center justify-center gap-2 rounded-md border-2 border-dashed border-neutral-300 bg-neutral-50 px-4 py-6 hover:border-brand-400 hover:bg-brand-50 transition-colors disabled:opacity-50"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-md border-2 border-dashed border-neutral-300 bg-white px-4 py-6 hover:border-blue-400 hover:bg-blue-50 transition-colors disabled:opacity-50"
           >
-            <Upload className="h-5 w-5 text-neutral-400" />
+            <Upload className="h-5 w-5 text-neutral-600" />
             <div className="text-center">
               <p className="text-sm font-medium text-neutral-700">
                 {logoFile ? logoFile.name : 'Click to upload logo'}
@@ -143,7 +143,7 @@ export const GenerationForm = ({
           isLoading={isLoading}
           loadingText="Generating..."
           size="lg"
-          className="flex-1"
+          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
         >
           Generate Presentation
         </Button>

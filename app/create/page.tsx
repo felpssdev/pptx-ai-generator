@@ -79,7 +79,7 @@ export default function CreatePage() {
   }, [resetStore]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-neutral-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
