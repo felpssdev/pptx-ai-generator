@@ -47,7 +47,7 @@ const initialState: BrandKitStoreState = {
 export const useBrandKitStore = create<BrandKitStore>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set) => ({
         // Initial state
         ...initialState,
 
