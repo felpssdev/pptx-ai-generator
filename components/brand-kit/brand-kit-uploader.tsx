@@ -106,8 +106,8 @@ export const BrandKitUploader = () => {
           className={cn(
             'relative rounded-lg border-2 border-dashed transition-colors',
             dragActive
-              ? 'border-brand-400 bg-brand-50'
-              : 'border-neutral-300 bg-neutral-50 hover:border-brand-300'
+              ? 'border-blue-400 bg-blue-50'
+              : 'border-neutral-300 bg-white hover:border-blue-300 hover:bg-blue-50'
           )}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -131,21 +131,21 @@ export const BrandKitUploader = () => {
               animate={dragActive ? { scale: 1.1 } : { scale: 1 }}
               className="rounded-full bg-white p-3 shadow-sm"
             >
-              <Upload className="h-6 w-6 text-brand-600" />
+              <Upload className="h-6 w-6 text-blue-600" />
             </motion.div>
 
             <div className="text-center">
               <p className="text-sm font-semibold text-neutral-900">
                 {isLoading ? 'Uploading logo...' : 'Drag and drop your logo here'}
               </p>
-              <p className="text-xs text-neutral-500">
+              <p className="text-xs text-neutral-600">
                 or click to select (PNG, JPG, SVG • max 5MB)
               </p>
             </div>
 
             {isLoading && (
               <div className="mt-2 flex gap-2 items-center">
-                <div className="h-2 w-2 rounded-full bg-brand-600 animate-pulse" />
+                <div className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
                 <span className="text-xs text-neutral-600">Processing...</span>
               </div>
             )}
@@ -160,7 +160,7 @@ export const BrandKitUploader = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="rounded-lg border border-neutral-200 bg-white p-4"
+            className="rounded-lg border-2 border-neutral-200 bg-white p-4"
           >
             <div className="flex items-start gap-4">
               {/* Image Preview */}
@@ -190,7 +190,7 @@ export const BrandKitUploader = () => {
               {/* Remove Button */}
               <button
                 onClick={handleReset}
-                className="flex-shrink-0 p-2 text-neutral-400 hover:text-neutral-600 transition-colors rounded-md hover:bg-neutral-100"
+                className="flex-shrink-0 p-2 text-neutral-500 hover:text-neutral-800 transition-colors rounded-md hover:bg-neutral-100"
                 aria-label="Remove logo"
               >
                 <X className="h-4 w-4" />
@@ -207,7 +207,7 @@ export const BrandKitUploader = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="rounded-lg border border-red-200 bg-red-50 p-4 flex gap-3 items-start"
+            className="rounded-lg border-2 border-red-200 bg-red-50 p-4 flex gap-3 items-start"
           >
             <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
             <div className="flex-1 min-w-0">
@@ -216,7 +216,7 @@ export const BrandKitUploader = () => {
             </div>
             <button
               onClick={() => {}}
-              className="flex-shrink-0 p-1 text-red-400 hover:text-red-600 transition-colors"
+              className="flex-shrink-0 p-1 text-red-600 hover:text-red-800 transition-colors"
             >
               <X className="h-4 w-4" />
             </button>
@@ -243,7 +243,7 @@ export const BrandKitUploader = () => {
             {colorList.map(({ name, key }) => (
               <div key={key} className="text-center">
                 <div
-                  className="h-10 rounded-md border border-neutral-200 mb-2 shadow-sm"
+                  className="h-10 rounded-md border-2 border-neutral-300 mb-2 shadow-sm"
                   style={{ backgroundColor: colors?.[key] }}
                   title={`${name}: ${colors?.[key]}`}
                 />

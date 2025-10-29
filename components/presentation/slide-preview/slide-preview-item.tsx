@@ -52,7 +52,7 @@ export const SlidePreviewItem = ({
         className={cn(
           'relative cursor-pointer overflow-hidden transition-shadow duration-200',
           'hover:shadow-lg',
-          isSelected && 'ring-2 ring-brand-500 shadow-lg'
+          isSelected && 'ring-2 ring-blue-500 shadow-lg'
         )}
         style={{ aspectRatio: '16 / 9' }}
       >
@@ -84,9 +84,9 @@ export const SlidePreviewItem = ({
                 className={cn(
                   'inline-block rounded-sm px-2 py-1 text-xs font-semibold',
                   'uppercase tracking-wider',
-                  slide.type === 'title' && 'bg-brand-500 text-white',
+                  slide.type === 'title' && 'bg-blue-600 text-white',
                   slide.type === 'content' && 'bg-blue-500 text-white',
-                  slide.type === 'conclusion' && 'bg-purple-500 text-white'
+                  slide.type === 'conclusion' && 'bg-purple-600 text-white'
                 )}
               >
                 {slide.type}

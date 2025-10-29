@@ -24,7 +24,7 @@ export const SuccessMessage = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="w-full max-w-2xl mx-auto rounded-lg border border-emerald-200 bg-emerald-50 p-6 text-center"
+      className="w-full max-w-2xl mx-auto rounded-lg border-2 border-emerald-300 bg-emerald-50 p-6 text-center"
     >
       {/* Icon */}
       <motion.div
@@ -47,7 +47,7 @@ export const SuccessMessage = ({
       </p>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-6 py-4 border-y border-emerald-200">
+      <div className="grid grid-cols-3 gap-4 mb-6 py-4 border-y-2 border-emerald-300">
         <div>
           <p className="text-3xl font-bold text-emerald-600">{slidesCount}</p>
           <p className="text-xs text-emerald-700">Slides</p>
