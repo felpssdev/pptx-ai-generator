@@ -50,104 +50,65 @@ export const SlidePreviewItem = ({
       <Card
         onClick={onClick}
         className={cn(
-          'relative cursor-pointer overflow-hidden transition-shadow duration-200',
-          'hover:shadow-lg',
-          isSelected && 'ring-2 ring-blue-500 shadow-lg'
+          'relative cursor-pointer overflow-hidden transition-all duration-200',
+          'hover:shadow-xl hover:border-blue-300',
+          isSelected && 'ring-2 ring-blue-500 shadow-lg',
+          'h-full'
         )}
-        style={{ aspectRatio: '16 / 9' }}
       >
-        <CardContent className="flex h-full flex-col p-4">
-          {/* Image Placeholder / Background */}
-          <div
-            className={cn(
-              'absolute inset-0 flex items-center justify-center',
-              'bg-gradient-to-br from-neutral-200 to-neutral-100',
-              'opacity-60'
-            )}
-          >
-            {slide.imagePrompt ? (
-              <div className="text-center">
-                <ImageIcon className="mx-auto h-8 w-8 text-neutral-500" />
-              </div>
-            ) : (
-              <div className="text-neutral-400">
-                <ImageIcon className="mx-auto h-12 w-12" />
-              </div>
-            )}
-          </div>
-
-          {/* Content Overlay */}
-          <div className="relative z-10 flex flex-col">
-            {/* Slide Type Badge */}
-            <div className="mb-2 flex items-start justify-between">
-              <span
-                className={cn(
-                  'inline-block rounded-sm px-2 py-1 text-xs font-semibold',
-                  'uppercase tracking-wider',
-                  slide.type === 'title' && 'bg-blue-600 text-white',
-                  slide.type === 'content' && 'bg-blue-500 text-white',
-                  slide.type === 'conclusion' && 'bg-purple-600 text-white'
-                )}
-              >
-                {slide.type}
-              </span>
-
-              {/* Slide Number */}
-              <span
-                className={cn(
-                  'rounded-full px-2 py-1 text-xs font-bold',
-                  'bg-white/80 text-neutral-700'
-                )}
-              >
-                {index + 1}
-              </span>
-            </div>
-
-            {/* Title */}
-            <h3
+        <CardContent className="flex h-full flex-col p-0">
+          {/* Header Section with Badge and Number */}
+          <div className="flex items-center justify-between px-5 pt-5 pb-3">
+            <span
               className={cn(
-                'line-clamp-2 text-sm font-bold leading-tight',
-                'text-neutral-900',
-                'mb-2'
+                'inline-block rounded-md px-3 py-1.5 text-xs font-bold',
+                'uppercase tracking-wider',
+                slide.type === 'title' && 'bg-blue-600 text-white',
+                slide.type === 'content' && 'bg-blue-500 text-white',
+                slide.type === 'conclusion' && 'bg-purple-600 text-white'
               )}
             >
+              {slide.type}
+            </span>
+
+            <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-sm font-bold text-neutral-700">
+              {index + 1}
+            </span>
+          </div>
+
+          {/* Content Section - Centered and Clean */}
+          <div className="flex-1 px-5 py-4 flex flex-col justify-center">
+            {/* Title - Large and prominent */}
+            <h3 className="text-lg font-bold text-neutral-900 leading-tight mb-4">
               {slide.title}
             </h3>
 
-            {/* Bullets */}
-            <div className="flex-1 space-y-1">
-              {slide.bullets.slice(0, 3).map((bullet, idx) => (
-                <div
-                  key={idx}
-                  className="flex gap-2"
-                >
-                  <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-neutral-600" />
-                  <p
-                    className={cn(
-                      'line-clamp-1 text-xs leading-snug',
-                      'text-neutral-700'
-                    )}
-                  >
-                    {bullet}
-                  </p>
+            {/* Bullet Count & Info */}
+            <div className="flex flex-wrap gap-3 text-sm text-neutral-600">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-blue-500" />
+                <span>{slide.bullets.length} key points</span>
+              </div>
+              {slide.imagePrompt && (
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="h-4 w-4 text-neutral-500" />
+                  <span>Image included</span>
                 </div>
-              ))}
-
-              {/* Show more indicator */}
-              {slide.bullets.length > 3 && (
-                <div className="pt-1 text-xs text-neutral-500">
-                  +{slide.bullets.length - 3} more
+              )}
+              {slide.speakerNotes && (
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="text-emerald-700">Speaker notes</span>
                 </div>
               )}
             </div>
+          </div>
 
-            {/* Speaker Notes Indicator */}
-            {slide.speakerNotes && (
-              <div className="mt-2 flex gap-1 text-xs text-neutral-600">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span>Speaker notes</span>
-              </div>
-            )}
+          {/* Footer hint */}
+          <div className="px-5 py-3 border-t border-neutral-200 bg-neutral-50">
+            <p className="text-xs text-neutral-500 text-center">
+              Click to view details
+            </p>
           </div>
         </CardContent>
       </Card>

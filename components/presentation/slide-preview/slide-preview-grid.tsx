@@ -70,13 +70,13 @@ export const SlidePreviewGrid = ({
         </motion.div>
       )}
 
-      {/* Slides Grid */}
-      <motion.div
-        className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
+          {/* Slides Grid */}
+          <motion.div
+            className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
         {/* Rendered Slides */}
         {slides.map((slide, index) => (
           <SlidePreviewItem
