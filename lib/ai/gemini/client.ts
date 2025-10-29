@@ -10,7 +10,7 @@ import {
   InvalidAPIKeyError,
 } from '../errors';
 
-const MODEL_NAME = 'gemini-pro';
+const MODEL_NAME = 'gemini-2.5-pro';
 
 class GeminiClient {
   private static instance: GeminiClient;
