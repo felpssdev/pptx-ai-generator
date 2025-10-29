@@ -61,16 +61,16 @@ export const SlidePreviewItem = ({
           <div
             className={cn(
               'absolute inset-0 flex items-center justify-center',
-              'bg-gradient-to-br from-neutral-100 to-neutral-50',
-              'opacity-50'
+              'bg-gradient-to-br from-neutral-200 to-neutral-100',
+              'opacity-60'
             )}
           >
             {slide.imagePrompt ? (
               <div className="text-center">
-                <ImageIcon className="mx-auto h-8 w-8 text-neutral-300" />
+                <ImageIcon className="mx-auto h-8 w-8 text-neutral-500" />
               </div>
             ) : (
-              <div className="text-neutral-200">
+              <div className="text-neutral-400">
                 <ImageIcon className="mx-auto h-12 w-12" />
               </div>
             )}

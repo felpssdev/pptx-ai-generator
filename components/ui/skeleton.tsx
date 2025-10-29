@@ -8,7 +8,7 @@ const Skeleton = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-200 bg-[length:200%_100%] animate-shimmer rounded-md',
+      'bg-gradient-to-r from-neutral-300 via-neutral-200 to-neutral-300 bg-[length:200%_100%] animate-shimmer rounded-md',
       className
     )}
     {...props}

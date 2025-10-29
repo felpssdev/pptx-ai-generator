@@ -49,18 +49,18 @@ export const SlidePreviewGrid = ({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="space-y-2 rounded-lg border border-brand-200 bg-brand-50 p-4"
+          className="space-y-2 rounded-lg border-2 border-blue-200 bg-blue-50 p-4"
         >
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <h3 className="text-sm font-semibold text-brand-900">
+              <h3 className="text-sm font-semibold text-blue-900">
                 Generating presentation...
               </h3>
-              <p className="text-xs text-brand-700">
+              <p className="text-xs text-blue-800">
                 Slide {slides.length} of {totalSlides}
               </p>
             </div>
-            <span className="text-lg font-bold text-brand-600">
+            <span className="text-lg font-bold text-blue-600">
               {progressPercent}%
             </span>
           </div>
@@ -113,8 +113,8 @@ export const SlidePreviewGrid = ({
           transition={{ delay: 0.5 }}
           className="text-center py-8"
         >
-          <div className="inline-flex items-center gap-2 text-sm text-neutral-600">
-            <div className="h-2 w-2 rounded-full bg-brand-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 text-sm text-neutral-700">
+            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
             Generating first slide...
           </div>
         </motion.div>

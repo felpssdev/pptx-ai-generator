@@ -24,10 +24,10 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
     const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
     const variantClasses = {
-      default: 'bg-brand-600',
-      success: 'bg-success',
-      warning: 'bg-warning',
-      error: 'bg-error',
+      default: 'bg-blue-600',
+      success: 'bg-emerald-600',
+      warning: 'bg-amber-600',
+      error: 'bg-red-600',
     };
 
     return (
@@ -37,7 +37,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         {...props}
       >
         <div
-          className='relative w-full h-2 bg-neutral-200 rounded-full overflow-hidden'
+          className='relative w-full h-2 bg-neutral-300 rounded-full overflow-hidden'
           role='progressbar'
           aria-valuenow={Math.round(percentage)}
           aria-valuemin={0}
@@ -55,7 +55,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         </div>
 
         {showLabel && (
-          <div className='mt-2 text-sm font-medium text-neutral-600'>
+          <div className='mt-2 text-sm font-medium text-neutral-700'>
             {Math.round(percentage)}%
           </div>
         )}
