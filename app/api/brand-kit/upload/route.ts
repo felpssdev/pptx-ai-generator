@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import sharp from 'sharp';
 import {
-  ALLOWED_FORMATS,
-  MAX_FILE_SIZE,
   LOGO_MAX_WIDTH,
   LOGO_MAX_HEIGHT,
   validateFileType,
   validateFileSize,
-  getFileExtension,
   UploadResponse,
   UploadError,
 } from '@/lib/utils/upload-validation';
