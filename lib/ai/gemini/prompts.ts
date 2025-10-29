@@ -1,5 +1,25 @@
 import { z } from 'zod';
 
+// ============ REQUEST SCHEMAS ============
+
+export const GeneratePresentationRequestSchema = z.object({
+  prompt: z
+    .string()
+    .min(5)
+    .max(1000)
+    .describe('User presentation request'),
+  numSlides: z
+    .number()
+    .int()
+    .min(1)
+    .max(50)
+    .describe('Number of slides to generate'),
+});
+
+export type GeneratePresentationRequest = z.infer<
+  typeof GeneratePresentationRequestSchema
+>;
+
 // ============ ZOD SCHEMAS ============
 
 const SpeakerNotesSchema = z.object({
