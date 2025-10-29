@@ -10,6 +10,7 @@ export interface SlidePreviewGridProps {
   isGenerating: boolean;
   totalSlides?: number;
   onSlideClick?: (index: number) => void;
+  showClickHint?: boolean; // Whether to show "Click to view details" on cards
 }
 
 /**
@@ -21,6 +22,7 @@ export const SlidePreviewGrid = ({
   isGenerating,
   totalSlides = 0,
   onSlideClick,
+  showClickHint = true,
 }: SlidePreviewGridProps) => {
   // Calculate progress percentage
   const progressPercent =
@@ -84,6 +86,7 @@ export const SlidePreviewGrid = ({
             slide={slide}
             index={index}
             onClick={() => onSlideClick?.(index)}
+            showClickHint={showClickHint}
           />
         ))}
 

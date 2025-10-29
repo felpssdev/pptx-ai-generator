@@ -11,6 +11,7 @@ export interface SlidePreviewItemProps {
   index: number;
   onClick?: () => void;
   isSelected?: boolean;
+  showClickHint?: boolean; // Whether to show "Click to view details" footer
 }
 
 /**
@@ -22,6 +23,7 @@ export const SlidePreviewItem = ({
   index,
   onClick,
   isSelected = false,
+  showClickHint = true,
 }: SlidePreviewItemProps) => {
   // Animation variants
   const containerVariants = {
@@ -104,12 +106,14 @@ export const SlidePreviewItem = ({
             </div>
           </div>
 
-          {/* Footer hint */}
-          <div className="px-5 py-3 border-t border-neutral-200 bg-neutral-50">
-            <p className="text-xs text-neutral-500 text-center">
-              Click to view details
-            </p>
-          </div>
+          {/* Footer hint - only show if specified */}
+          {showClickHint && (
+            <div className="px-5 py-3 border-t border-neutral-200 bg-neutral-50">
+              <p className="text-xs text-neutral-500 text-center">
+                Click to view details
+              </p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </motion.div>

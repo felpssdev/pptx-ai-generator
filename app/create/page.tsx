@@ -189,6 +189,8 @@ export default function CreatePage() {
                   slides={slides}
                   isGenerating={false}
                   totalSlides={slides.length}
+                  showClickHint={false}
+                  onSlideClick={handlePreview}
                 />
               </div>
 
