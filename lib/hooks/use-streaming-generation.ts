@@ -21,8 +21,6 @@ export interface UseStreamingGeneration
 }
 
 const DEFAULT_NUM_SLIDES = 5;
-const MAX_RETRIES = 3;
-const RETRY_DELAY = 1000; // 1 second
 
 export function useStreamingGeneration(): UseStreamingGeneration {
   const [state, setState] = useState<UseStreamingGenerationState>({
@@ -97,39 +95,6 @@ export function useStreamingGeneration(): UseStreamingGeneration {
       }
     }
   }, [closeEventSource]);
-
-  /**
-   * Handle EventSource errors
-   */
-  const handleError = useCallback(
-    (error: Event) => {
-      closeEventSource();
-
-      if (retryCountRef.current < MAX_RETRIES) {
-        retryCountRef.current += 1;
-        setState((prev) => ({
-          ...prev,
-          error: new Error(
-            `Connection error. Retrying (${retryCountRef.current}/${MAX_RETRIES})...`
-          ),
-        }));
-
-        // Retry after delay
-        setTimeout(() => {
-          // Retry logic would be triggered in generate()
-        }, RETRY_DELAY);
-      } else {
-        setState((prev) => ({
-          ...prev,
-          isGenerating: false,
-          error: new Error(
-            'Connection failed. Please try again or contact support.'
-          ),
-        }));
-      }
-    },
-    [closeEventSource]
-  );
 
   /**
    * Generate presentation via streaming
