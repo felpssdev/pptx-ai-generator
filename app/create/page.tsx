@@ -13,7 +13,6 @@ import { SuccessMessage } from '@/components/presentation/generation-form/succes
  * Handles presentation creation with streaming slides
  */
 export default function CreatePage() {
-  const [generationComplete, setGenerationComplete] = useState(false);
   const [totalSlides, setTotalSlides] = useState(0);
 
   // Hooks
@@ -27,14 +26,10 @@ export default function CreatePage() {
   const handleGenerate = useCallback(
     async (prompt: string, numSlides: number) => {
       try {
-        setGenerationComplete(false);
         setTotalSlides(numSlides);
 
         // Start streaming generation
         await generate(prompt, numSlides);
-
-        // Mark as complete
-        setGenerationComplete(true);
       } catch (err) {
         console.error('Generation error:', err);
         // Error is handled in hook
@@ -74,7 +69,6 @@ export default function CreatePage() {
    */
   const handleReset = useCallback(() => {
     resetStore();
-    setGenerationComplete(false);
     setTotalSlides(0);
   }, [resetStore]);
 
@@ -114,7 +108,7 @@ export default function CreatePage() {
           </AnimatePresence>
 
           {/* Conditional Rendering */}
-          {!isGenerating && slides.length === 0 && !generationComplete ? (
+          {!isGenerating && slides.length === 0 && (
             // Initial Form State
             <div className="space-y-8">
               <GenerationForm
@@ -164,10 +158,10 @@ export default function CreatePage() {
                 ))}
               </motion.div>
             </div>
-          ) : null}
+          )}
 
           {/* Generation in Progress */}
-          {(isGenerating || (slides.length > 0 && !generationComplete)) && (
+          {isGenerating && (
             <div className="space-y-6">
               <SlidePreviewGrid
                 slides={slides}
@@ -178,7 +172,7 @@ export default function CreatePage() {
           )}
 
           {/* Success State */}
-          {generationComplete && slides.length > 0 && !isGenerating && (
+          {!isGenerating && slides.length > 0 && (
             <div className="space-y-8">
               <SuccessMessage
                 slidesCount={slides.length}

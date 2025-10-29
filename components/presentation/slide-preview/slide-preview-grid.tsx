@@ -12,8 +12,6 @@ export interface SlidePreviewGridProps {
   onSlideClick?: (index: number) => void;
 }
 
-const SKELETON_COUNT = 5;
-
 /**
  * Grid container for slide previews with loading states
  * Displays slides in responsive grid with skeleton loaders while generating
@@ -27,6 +25,10 @@ export const SlidePreviewGrid = ({
   // Calculate progress percentage
   const progressPercent =
     totalSlides > 0 ? Math.round((slides.length / totalSlides) * 100) : 0;
+
+  // Calculate remaining skeletons to show (only what's needed)
+  const remainingSkeletons = Math.max(0, totalSlides - slides.length);
+  const skeletonsToShow = isGenerating ? remainingSkeletons : 0;
 
   // Empty state
   if (slides.length === 0 && !isGenerating) {
@@ -87,7 +89,7 @@ export const SlidePreviewGrid = ({
 
         {/* Loading Skeletons */}
         {isGenerating &&
-          Array.from({ length: SKELETON_COUNT }).map((_, index) => (
+          Array.from({ length: skeletonsToShow }).map((_, index) => (
             <motion.div
               key={`skeleton-${index}`}
               initial={{ opacity: 0, y: 20 }}
@@ -115,7 +117,7 @@ export const SlidePreviewGrid = ({
         >
           <div className="inline-flex items-center gap-2 text-sm text-neutral-700">
             <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-            Generating first slide...
+            Generating slides {slides.length + 1} of {totalSlides}...
           </div>
         </motion.div>
       )}
