@@ -10,7 +10,7 @@ import {
   InvalidAPIKeyError,
 } from '../errors';
 
-const MODEL_NAME = 'gemini-1.5-flash';
+const MODEL_NAME = 'gemini-pro';
 
 class GeminiClient {
   private static instance: GeminiClient;
@@ -30,11 +30,11 @@ class GeminiClient {
   }
 
   private initialize(): void {
-    const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
       throw new InvalidAPIKeyError(
-        'NEXT_PUBLIC_GEMINI_API_KEY environment variable is not set'
+        'GEMINI_API_KEY environment variable is not set'
       );
     }
 
