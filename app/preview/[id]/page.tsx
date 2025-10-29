@@ -243,7 +243,7 @@ export default function PreviewPage({ params }: PreviewPageProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link href={`/presentation/${id}`}>
+            <Link href={`/present/${id}`}>
               <Button variant="outline" className="gap-2">
                 <Play className="w-4 h-4" />
                 Presentation Mode
