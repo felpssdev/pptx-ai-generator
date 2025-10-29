@@ -3,48 +3,122 @@
 import { motion } from 'framer-motion';
 import { Slide } from '@/lib/ai';
 import { SlidePreviewItem } from './slide-preview-item';
+import { Skeleton, Progress } from '@/components/ui';
 
 export interface SlidePreviewGridProps {
   slides: Slide[];
-  selectedSlideId?: string;
-  onSlideSelect?: (slide: Slide, index: number) => void;
+  isGenerating: boolean;
+  totalSlides?: number;
+  onSlideClick?: (index: number) => void;
 }
 
+const SKELETON_COUNT = 5;
+
 /**
- * Grid container for slide previews
- * Displays slides in responsive grid with staggered animations
+ * Grid container for slide previews with loading states
+ * Displays slides in responsive grid with skeleton loaders while generating
  */
 export const SlidePreviewGrid = ({
   slides,
-  selectedSlideId,
-  onSlideSelect,
+  isGenerating,
+  totalSlides = 0,
+  onSlideClick,
 }: SlidePreviewGridProps) => {
-  if (slides.length === 0) {
+  // Calculate progress percentage
+  const progressPercent =
+    totalSlides > 0 ? Math.round((slides.length / totalSlides) * 100) : 0;
+
+  // Empty state
+  if (slides.length === 0 && !isGenerating) {
     return (
-      <div className="flex h-64 items-center justify-center rounded-lg border-2 border-dashed border-neutral-300">
-        <p className="text-center text-neutral-500">
-          No slides yet. Generate a presentation to get started!
-        </p>
+      <div className="flex h-64 items-center justify-center rounded-lg border-2 border-dashed border-neutral-300 bg-neutral-50">
+        <div className="text-center">
+          <p className="text-neutral-600">
+            No slides yet. Generate a presentation to get started!
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <motion.div
-      className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      {slides.map((slide, index) => (
-        <SlidePreviewItem
-          key={slide.id}
-          slide={slide}
-          index={index}
-          isSelected={slide.id === selectedSlideId}
-          onClick={() => onSlideSelect?.(slide, index)}
-        />
-      ))}
-    </motion.div>
+    <div className="space-y-4">
+      {/* Progress Section */}
+      {isGenerating && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="space-y-2 rounded-lg border border-brand-200 bg-brand-50 p-4"
+        >
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold text-brand-900">
+                Generating presentation...
+              </h3>
+              <p className="text-xs text-brand-700">
+                Slide {slides.length} of {totalSlides}
+              </p>
+            </div>
+            <span className="text-lg font-bold text-brand-600">
+              {progressPercent}%
+            </span>
+          </div>
+          <Progress value={progressPercent} showLabel={false} />
+        </motion.div>
+      )}
+
+      {/* Slides Grid */}
+      <motion.div
+        className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Rendered Slides */}
+        {slides.map((slide, index) => (
+          <SlidePreviewItem
+            key={slide.id}
+            slide={slide}
+            index={index}
+            onClick={() => onSlideClick?.(index)}
+          />
+        ))}
+
+        {/* Loading Skeletons */}
+        {isGenerating &&
+          Array.from({ length: SKELETON_COUNT }).map((_, index) => (
+            <motion.div
+              key={`skeleton-${index}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: (slides.length + index) * 0.05,
+                duration: 0.3,
+              }}
+            >
+              <Skeleton
+                className="h-full w-full"
+                style={{ aspectRatio: '16 / 9' }}
+              />
+            </motion.div>
+          ))}
+      </motion.div>
+
+      {/* Loading Message */}
+      {isGenerating && slides.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-center py-8"
+        >
+          <div className="inline-flex items-center gap-2 text-sm text-neutral-600">
+            <div className="h-2 w-2 rounded-full bg-brand-500 animate-pulse" />
+            Generating first slide...
+          </div>
+        </motion.div>
+      )}
+    </div>
   );
 }
