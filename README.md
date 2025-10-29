@@ -372,7 +372,7 @@ See `package.json` for full list. Key packages:
 
 ## 📞 Support
 
-- 📧 Email: support@example.com
+- 📧 Email: nah bro
 - 🐛 Issues: [GitHub Issues](https://github.com/yourusername/pptx-ai-generator/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/pptx-ai-generator/discussions)
 
@@ -400,7 +400,3 @@ MIT License - see LICENSE file for details
 - [ ] Mobile app (React Native)
 
 ---
-
-**Happy Creating! 🎉**
-
-Built with ❤️ by the pptx-ai team
