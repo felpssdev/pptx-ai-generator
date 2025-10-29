@@ -20,14 +20,6 @@ export default function CreatePage() {
     useStreamingGeneration();
   const { setPresentation, reset: resetStore } = usePresentationStore();
 
-  // Debug logging
-  console.log('CreatePage render:', {
-    isGenerating,
-    slidesCount: slides.length,
-    totalSlides,
-    showSuccess: !isGenerating && slides.length > 0,
-  });
-
   /**
    * Handle generation form submission
    */

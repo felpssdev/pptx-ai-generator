@@ -83,7 +83,6 @@ export async function POST(request: NextRequest) {
 
             const text = chunk.text || '';
             fullText += text;
-            console.log('[API] Chunk received, length:', text.length, 'total:', fullText.length);
 
             // Send chunk event
             const chunkEvent: SSEEvent<string> = {
@@ -96,7 +95,7 @@ export async function POST(request: NextRequest) {
               )
             );
 
-            // Try to parse complete objects
+            // Try to parse complete objects (not currently used as Gemini returns full JSON)
             const objects = parser.feed(text);
 
             for (const obj of objects) {
@@ -104,7 +103,6 @@ export async function POST(request: NextRequest) {
                 // Try to parse as Slide
                 if ('id' in obj && 'type' in obj) {
                   try {
-                    console.log('[API] Parsed slide:', obj);
                     const slideEvent: SSEEvent<Slide> = {
                       type: 'slide',
                       data: obj as Slide,
@@ -123,8 +121,6 @@ export async function POST(request: NextRequest) {
           }
 
           // Try to parse final presentation from accumulated text
-          console.log('[API] Stream complete. Full text length:', fullText.length);
-          
           // Remove markdown code blocks if present
           let cleanedText = fullText;
           if (cleanedText.includes('```json')) {
@@ -139,12 +135,10 @@ export async function POST(request: NextRequest) {
           // Try to parse and send slides
           try {
             const parsed = JSON.parse(cleanedText);
-            console.log('[API] SUCCESS! Parsed presentation with', parsed.slides?.length, 'slides');
             parsedPresentation = validatePresentationResponse(parsed);
 
             // Send all slides as individual events
             if (parsedPresentation.slides) {
-              console.log('[API] Sending', parsedPresentation.slides.length, 'slide events');
               for (const slide of parsedPresentation.slides) {
                 const slideEvent: SSEEvent<Slide> = {
                   type: 'slide',
@@ -157,20 +151,8 @@ export async function POST(request: NextRequest) {
                 );
               }
             }
-
-            // Validate slide count
-            if (
-              parsedPresentation.slides &&
-              parsedPresentation.slides.length !==
-                validatedRequest.numSlides
-            ) {
-              console.warn(
-                `[API] Slide count mismatch: expected ${validatedRequest.numSlides}, got ${parsedPresentation.slides.length}`
-              );
-            }
           } catch (parseError) {
-            console.error('[API] Failed to parse JSON:', parseError);
-            console.error('[API] Full text:', cleanedText);
+            console.error('[API] Failed to parse presentation:', parseError instanceof Error ? parseError.message : 'Unknown error');
           }
 
           // Send complete event
