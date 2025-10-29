@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, use } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Download,
@@ -20,9 +20,9 @@ import { Button } from '@/components/ui';
 import Link from 'next/link';
 
 interface PreviewPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 /**
@@ -36,7 +36,7 @@ interface PreviewPageProps {
  * - PPTX export
  */
 export default function PreviewPage({ params }: PreviewPageProps) {
-  const { id } = params;
+  const { id } = use(params);
   const { presentation } = usePresentationStore();
   const { logo, colors, selectedTemplate, setTemplate } = useBrandKitStore();
 

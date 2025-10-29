@@ -1,5 +1,6 @@
 'use client';
 
+import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePresentationStore } from '@/lib/store';
 import { PresentationMode } from '@/components/presentation';
@@ -16,9 +17,9 @@ interface Slide {
 }
 
 interface PresentationPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 /**
@@ -33,7 +34,7 @@ interface PresentationPageProps {
 export default function PresentationPage({
   params,
 }: PresentationPageProps) {
-  const { id } = params;
+  const { id } = use(params);
   const router = useRouter();
   const { presentation } = usePresentationStore();
 

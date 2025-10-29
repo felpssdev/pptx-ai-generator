@@ -26,12 +26,12 @@ const SpeakerNotesSchema = z.object({
   script: z
     .string()
     .min(100)
-    .max(1000)
+    .max(3000)
     .describe('2-3 paragraphs of natural, conversational delivery notes'),
   duration: z
     .string()
-    .regex(/^\d+(?:min\s+)?\d+s$/)
-    .describe('Estimated speaking time (e.g., "2min 30s")'),
+    .regex(/^\d+(?:min)?(?:\s+\d+s)?$/)
+    .describe('Estimated speaking time (e.g., "2min", "2min 30s", "30s")'),
   tips: z
     .array(z.string().min(10).max(200))
     .min(1)

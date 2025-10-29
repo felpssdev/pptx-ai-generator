@@ -20,6 +20,14 @@ export default function CreatePage() {
     useStreamingGeneration();
   const { setPresentation, reset: resetStore } = usePresentationStore();
 
+  // Debug logging
+  console.log('CreatePage render:', {
+    isGenerating,
+    slidesCount: slides.length,
+    totalSlides,
+    showSuccess: !isGenerating && slides.length > 0,
+  });
+
   /**
    * Handle generation form submission
    */
@@ -51,8 +59,8 @@ export default function CreatePage() {
       });
       setPresentation(presentation);
 
-      // Navigate to preview page
-      window.location.href = '/preview';
+      // Navigate to preview page with ID
+      window.location.href = `/preview/${presentation.id}`;
     }
   }, [slides, setPresentation]);
 

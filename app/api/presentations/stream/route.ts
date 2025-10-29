@@ -83,6 +83,7 @@ export async function POST(request: NextRequest) {
 
             const text = chunk.text || '';
             fullText += text;
+            console.log('[API] Chunk received, length:', text.length, 'total:', fullText.length);
 
             // Send chunk event
             const chunkEvent: SSEEvent<string> = {
@@ -103,6 +104,7 @@ export async function POST(request: NextRequest) {
                 // Try to parse as Slide
                 if ('id' in obj && 'type' in obj) {
                   try {
+                    console.log('[API] Parsed slide:', obj);
                     const slideEvent: SSEEvent<Slide> = {
                       type: 'slide',
                       data: obj as Slide,
@@ -121,25 +123,54 @@ export async function POST(request: NextRequest) {
           }
 
           // Try to parse final presentation from accumulated text
-          const jsonMatch = fullText.match(/\{[\s\S]*\}$/);
-          if (jsonMatch) {
-            try {
-              const parsed = JSON.parse(jsonMatch[0]);
-              parsedPresentation = validatePresentationResponse(parsed);
+          console.log('[API] Stream complete. Full text length:', fullText.length);
+          
+          // Remove markdown code blocks if present
+          let cleanedText = fullText;
+          if (cleanedText.includes('```json')) {
+            cleanedText = cleanedText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+          } else if (cleanedText.includes('```')) {
+            cleanedText = cleanedText.replace(/```\n?/g, '');
+          }
+          
+          // Trim whitespace
+          cleanedText = cleanedText.trim();
+          
+          // Try to parse and send slides
+          try {
+            const parsed = JSON.parse(cleanedText);
+            console.log('[API] SUCCESS! Parsed presentation with', parsed.slides?.length, 'slides');
+            parsedPresentation = validatePresentationResponse(parsed);
 
-              // Validate slide count
-              if (
-                parsedPresentation.slides &&
-                parsedPresentation.slides.length !==
-                  validatedRequest.numSlides
-              ) {
-                throw new GenerationError(
-                  `Expected ${validatedRequest.numSlides} slides, got ${parsedPresentation.slides.length}`
+            // Send all slides as individual events
+            if (parsedPresentation.slides) {
+              console.log('[API] Sending', parsedPresentation.slides.length, 'slide events');
+              for (const slide of parsedPresentation.slides) {
+                const slideEvent: SSEEvent<Slide> = {
+                  type: 'slide',
+                  data: slide,
+                };
+                controller.enqueue(
+                  encoder.encode(
+                    `data: ${JSON.stringify(slideEvent)}\n\n`
+                  )
                 );
               }
-            } catch {
-              // Continue to send partial data
             }
+
+            // Validate slide count
+            if (
+              parsedPresentation.slides &&
+              parsedPresentation.slides.length !==
+                validatedRequest.numSlides
+            ) {
+              console.warn(
+                `[API] Slide count mismatch: expected ${validatedRequest.numSlides}, got ${parsedPresentation.slides.length}`
+              );
+            }
+          } catch (parseError) {
+            console.error('[API] Failed to parse JSON:', parseError);
+            console.error('[API] Full text:', cleanedText);
           }
 
           // Send complete event
