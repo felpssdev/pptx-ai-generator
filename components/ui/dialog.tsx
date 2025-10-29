@@ -138,7 +138,7 @@ const DialogContent = React.forwardRef<
           role='dialog'
           aria-modal='true'
           className={cn(
-            'relative w-full max-w-lg bg-white rounded-lg shadow-lg',
+            'relative w-full max-w-lg bg-white rounded-lg shadow-xl border-2 border-neutral-200',
             'max-h-[90vh] overflow-y-auto',
             'animate-scale-in',
             className
@@ -148,7 +148,7 @@ const DialogContent = React.forwardRef<
           {showCloseButton && (
             <button
               onClick={() => onOpenChange(false)}
-              className='absolute right-4 top-4 text-neutral-400 hover:text-neutral-600 transition-colors p-1'
+              className='absolute right-4 top-4 text-neutral-500 hover:text-neutral-800 transition-colors p-1'
               aria-label='Close dialog'
             >
               <X className='h-5 w-5' />
@@ -167,7 +167,7 @@ const DialogHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('px-6 py-4 border-b border-neutral-200', className)}
+    className={cn('px-6 py-4 border-b-2 border-neutral-200', className)}
     {...props}
   />
 ));
@@ -191,7 +191,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('text-sm text-neutral-500', className)}
+    className={cn('text-sm text-neutral-600', className)}
     {...props}
   />
 ));
@@ -216,7 +216,7 @@ const DialogFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'px-6 py-4 border-t border-neutral-200 flex gap-3 justify-end',
+      'px-6 py-4 border-t-2 border-neutral-200 flex gap-3 justify-end',
       className
     )}
     {...props}

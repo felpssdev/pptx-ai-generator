@@ -69,14 +69,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             className={cn(
-              'w-full px-4 py-2 rounded-md border transition-colors',
+              'w-full px-4 py-2 rounded-md border-2 transition-colors bg-white text-neutral-900',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
               'disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed',
-              'placeholder:text-neutral-400',
+              'placeholder:text-neutral-500',
               {
-                'border-error focus-visible:ring-error': hasError,
-                'border-success focus-visible:ring-success': hasSuccess,
-                'border-neutral-300 focus-visible:ring-brand-500':
+                'border-red-500 focus-visible:ring-red-500': hasError,
+                'border-emerald-500 focus-visible:ring-emerald-500': hasSuccess,
+                'border-neutral-300 focus-visible:ring-blue-500 focus-visible:border-blue-500':
                   !hasError && !hasSuccess,
               },
               'pr-10',
@@ -105,7 +105,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
 
           {hasSuccess && (
-            <div className='absolute right-3 top-1/2 -translate-y-1/2 text-success'>
+            <div className='absolute right-3 top-1/2 -translate-y-1/2 text-emerald-600'>
               <svg
                 className='h-5 w-5'
                 fill='currentColor'
@@ -125,9 +125,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <div
             id={`${inputId}-error-hint`}
             className={cn('mt-2 text-sm', {
-              'text-error': hasError,
-              'text-success': hasSuccess,
-              'text-neutral-500': hint && !hasError && !hasSuccess,
+              'text-red-600': hasError,
+              'text-emerald-600': hasSuccess,
+              'text-neutral-600': hint && !hasError && !hasSuccess,
             })}
           >
             {error || success || hint}
