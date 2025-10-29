@@ -9,3 +9,6 @@ export type { SlidePreviewItemProps } from './slide-preview/slide-preview-item';
 
 export { SpeakerNotesPanel } from './speaker-notes';
 export type { SpeakerNotesPanelProps } from './speaker-notes';
+
+export { PresentationMode } from './presentation-mode';
+export type { PresentationModeProps } from './presentation-mode';
